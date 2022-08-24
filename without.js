@@ -29,6 +29,22 @@ const assertArraysEqual = function (arrayA, arrayB) {
 // return a new array with only those elements from source that are not present in the itemsToRemove array
 
 
+// Create a function that takes in two arrays, one original set, one a set of items to remove
+const without = (source, itemsToRemove) => {
+  // create a variable that holds our new array WITH elements we WANT
+  let newArray = [];
+  // look through each element in source & compare to itemsToRemove
+    // we can use a different variation of eqArrays function
+  for (let i = 0; i < source.length; i++) {
+    console.log(`Item at ${i}: ${source[i]} | itemsToRemove is ${itemsToRemove[i]}`)
+    if (source[i] !== itemsToRemove[i]) {
+      newArray.push(source[i]);
+      console.log(`Item pushed: ${source[i]}`);
+    }
+  }
+  // return that variable, new array
+  return newArray; 
+}
 
 
 
