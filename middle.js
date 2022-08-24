@@ -33,38 +33,52 @@ const assertArraysEqual = function (arrayA, arrayB) {
 const midIndex = (array) => {
   // take total num of elms, div by 2, round down => should find our mid index
   const iAtMid = Math.floor(array.length / 2);
-  console.log(iAtMid);
   return iAtMid;
 };
+
+// checks if an array length is odd
+const isArrOdd = (array) => {
+  return array.length % 2 !== 0 ? true : false;
+}
+// checks if an array length is even
+const isArrEven = (array) => {
+  return array.length % 2 === 0 ? true : false;
+}
+
 
 // create a function that takes in an array
 const middle = (array) => {
   let midElm = [];
   index = midIndex(array);
-  midElm.push(array[index]);
-  console.log(`index num: ${index}, elm pushed: ${array[index]}, new array: ${midElm}`);
-  
   // Edge cases; if arr.length < 3, we should get back empty arr []
-
-
+  if (array.length < 3) {
+    return midElm;
+  } else if (isArrOdd(array)) {
+    // Edge cases; odd # of elms => return the middle
+    midElm.push(array[index]);
+    console.log(`index num: ${index}, elm pushed: ${array[index]}, new array: ${midElm}`);
+  } else if (isArrEven(array)) {
+    // Edge cases; even # of elms => return 2 of the middle elms
+    midElm.push(array[index - 1], array[index]);
+    console.log(`index num: ${index}, elm pushed: ${array[index]}, new array: ${midElm}`);
+  } else {
+    return "Not valid";
+  }
   // spit out a NEW array; containing the middle-most elements
   return midElm;
 }
 
+console.log(middle([1, 2])); // => []
+console.log(middle([1, 2, 3, 4, 5, 6, 7, 8])) // => [4, 5]
 console.log(middle([1, 2, 3, 4, 5])); // => [3]
 
-
-
-
-// Edge cases; odd # of elms => return the middle
-// if arr.length % 2 !== 0; => checks if odd
-
-// Edge cases; even # of elms => return 2 of the middle elms
-// if arr.length % 2 === 0; => checks if even 
-
-
-
-
+const arr1 = ['hello', 'hi', 'goodbye']
+const arr2 = ['boom', 'bang', 'foo', 'bar']
+console.log(middle(arr1)); // => ['hi']
+console.log(middle(arr2)); // => ['bang', 'foo']
 
 // Test assertions
 // Use assertArraysEqual function to test our new func
+assertArraysEqual(middle([1, 2, 3, 4, 5]), middle([2, 3, 3, 4, 6])); // => pass; since middle is still [3]
+
+assertArraysEqual(middle(['foo', 'bar', 'hey', 'hello']), middle(['world', 'bar', 'hey', 'yo'])); // => pass; ['bar', 'hey']
