@@ -2,8 +2,8 @@
 const eqArrays = function(arrayA, arrayB) {
   // loop through elements of arrayA and arrayB
   for (let i = 0; i < arrayA.length; i++) {
-    console.log(`arrayA at ${i}: `, arrayA[i])
-    console.log(`arrayB at ${i}: `, arrayB[i])
+    // console.log(`arrayA at ${i}: `, arrayA[i])
+    // console.log(`arrayB at ${i}: `, arrayB[i])
     // Compare the elements at the same index for each array
     if (arrayA[i] !== arrayB[i]) {
       return false;
@@ -31,28 +31,38 @@ const assertArraysEqual = function (arrayA, arrayB) {
 
 // Create a function that takes in two arrays, one original set, one a set of items to remove
 const without = (source, itemsToRemove) => {
-  // create a variable that holds our new array WITH elements we WANT
-  let newArray = [];
-  // look through each element in source & compare to itemsToRemove
-    // we can use a different variation of eqArrays function
-  for (let i = 0; i < source.length; i++) {
-    console.log(`Item at ${i}: ${source[i]} | itemsToRemove is ${itemsToRemove[i]}`)
-    if (source[i] !== itemsToRemove[i]) {
-      newArray.push(source[i]);
-      console.log(`Item pushed: ${source[i]}`);
+  let newArray = source;
+  for (const item of itemsToRemove) {
+    console.log(`itemsToRemove: ${item}`)
+    for (let i = 0; i < newArray.length; i++) {
+      console.log(`source index ${i}: ${newArray[i]}`);
+      if (item === newArray[i]) {
+        console.log(`source: ${newArray[i]} matches itemsToRemove: ${item} - splice here`);
+        newArray.splice(i, 1);
+      }
     }
   }
-  // return that variable, new array
-  return newArray; 
+  console.log(source);
+  console.log(newArray);
+  return newArray;
 }
 
+// Edge Case; if an element in source === an element in itemsToRemove, we remove that item
+// we can instead push the elements that DO NOT === an element in itemsToRemove to a new array
 
+// make a new empty array to store our subset array into
 
 
 
 // TEST CODES
-without([1, 2, 3], [1]) // => [2, 3]
-without(["1", "2", "3"], [1, 2, "3"]) // => ["1", "2"]
+console.log(without([1, 2, 3, 4], [3, 4])); // => [1, 2];
+// let arr1 = [1, 2, 3, 4];
+// console.log(without(arr1, [2])); // => [1, 3, 4]; also arr1 shouldn't change originally
 
-// Use assertArraysEqual to write test cases for various scenarios.
-assertArraysEqual([1, 2, 3], without(["1", "2", 1, "3", 2, 3], ["1", "2", "3"])); // => pass
+// console.log(without([1, 2, 3], [1])) // => [2, 3]
+// console.log(without(["hello", "hi", 3, "hola"], ["boy", "girl", 3])) // => ["hello", "hi", "hola"] 
+// console.log(without(["1", "2", "3"], [1, 2, "3"])) // => ["1", "2"]
+
+// // Use assertArraysEqual to write test cases for various scenarios.
+// assertArraysEqual([1, 2, 3], without(["1", "2", 1, "3", 2, 3], ["1", "2", "3"])); // => pass
+// assertArraysEqual([1, 2, 3], without(["1", "2", 1, "1", "2", 3, "3", 2], ["1", "2", "3"])); // [1, 2, 3] === [1, 3, 2] ? false => fail
