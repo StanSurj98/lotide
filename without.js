@@ -29,20 +29,36 @@ const assertArraysEqual = function (arrayA, arrayB) {
 // return a new array with only those elements from source that are not present in the itemsToRemove array
 
 const without = (source, itemsToRemove) => {
-  let newArray = source;
-  for (const item of itemsToRemove) {
-    console.log(`itemsToRemove: ${item}`)
-    for (let i = 0; i < newArray.length; i++) {
-      console.log(`source index ${i}: ${newArray[i]}`);
-      if (item === newArray[i]) {
-        console.log(`source: ${newArray[i]} matches itemsToRemove: ${item} - splice here`);
-        newArray.splice(i, 1);
-      }
+  let result = [];
+  // iterate through each element in source
+  for (const elm of source) {
+    console.log(`Elm of source: ${elm}`);
+    // if the elements of source, is NOT included in itemsToRemove...
+    if (! itemsToRemove.includes(elm)) {
+      console.log(`Elm of source: ${elm} is NOT in itemsToRemove: ${itemsToRemove}`);
+      // we push that element to the array that we want to see
+      result.push(elm);
+      console.log(`Item pushed: ${elm}`)
     }
   }
-  return newArray;
+  return result;
 };
-// BUG - mutates original array...
+
 
 // TEST CODES
 console.log(without([1, 2, 3, 4], [3, 4])); // => [1, 2];
+
+const words = ["hello", "world", "lighthouse"];
+console.log(without(words, ["lighthouse"])); // no need to capture return value for this test case
+// Make sure the original array was not altered by the without function
+assertArraysEqual(words, ["hello", "world", "lighthouse"]);
+
+console.log(without(['hi', 'hey', 1, 2, 3], ['2', 1, 'hi'])); // ['hey', 2, 3]
+const arr1 = [1, 2, 3, 4, 5];
+const rmArr1 = [3, 5]; 
+assertArraysEqual(arr1, without(arr1, rmArr1)); // fail
+console.log(arr1); // still [1, 2, 3, 4, 5]
+
+assertArraysEqual(without([1, 2, 3, 4, 5], [3, 5]), without(arr1, rmArr1)); // pass
+
+console.log(without(['hi', 'welcome', 'bienvenue', 1, 2, 3, 4, 5], ['bienvenue', 'bienvenue', 3, 4, 4, 4])); // ['hi', 'welcome', 1, 2, 5]
