@@ -25,56 +25,53 @@ const eqArrays = function(arrayA, arrayB) {
 };
 
 const eqObjects = function(object1, object2) {
-  console.log(`Obj1 keys: ${Object.keys(object1)} | Obj2 keys: ${Object.keys(object2)}`);
+  const keys1 = Object.keys(object1);
+  const keys2 = Object.keys(object2);
+  console.log(`Keys => Obj1: ${keys1} | Obj2: ${keys2}`);
   
-  if (Object.keys(object1).length === Object.keys(object2).length) {
-
-    for (const property of Object.keys(object1)) {
+  if (keys1.length === keys2.length) {
+    for (const property of keys1) {
       const value1 = object1[property];
       const value2 = object2[property];
       if (Array.isArray(value1)) { // if the current iterated key is an array
-        console.log(`Property: ${property} is an array`);
+        console.log(`Property: ${property} is an array.`);
         if (eqArrays(value1, value2)) {
+          console.log(`These arrays are equal.`);
           console.log(`Obj1 => Property: ${property}, Value: ${value1}`);
           console.log(`Obj2 => Property: ${property}, Value: ${value2}`);
         } else {
+          console.log(`The arrays are not equal. Exiting.`);
           return false;
         }
-      } else if (value1 === value2) {
-        // if the value is the same, return true, the objects are truly equal
+      } else if (value1 === value2) { // if property isn't an array, just compare the value
+        console.log(`Values are the same for these properties.`)
         console.log(`Obj1 => Property: ${property}, Value: ${value1}`);
         console.log(`Obj2 => Property: ${property}, Value: ${value2}`);
       } else {
+        console.log(`The values are not equal. Exiting.`);
         return false;
       }
     }
   } else {
+    console.log(`The number of properties are not equal. Exiting.`);
     return false;
   }
-  return true; // we want everything that can go wrong to exit false immediately but save the true as our default return
+  // we want true as default, we provided a false return for everything that would not satisfy the conditionals
+  return true; 
 };
 
 
-// const ab = { a: "1", b: "2" };
-// const ba = { b: "2", a: "1" };
+const ab = { a: "1", b: "2" };
+const ba = { b: "2", a: "1" };
+const abc = { a: "1", b: "2", c: "3" };
 
-
-// // assertEqual(ab, ba); // => fail; ab && ba are not primitives
-// // assertEqual(ab.a, ba.a); // => pass; "1" === "1", primitives: string
-
-// console.log(eqObjects(ab, ba)); // => true
-
-// const abc = { a: "1", b: "2", c: "3" };
-// console.log(eqObjects(ab, abc)); // => false
+console.log(eqObjects(ab, ba)); // => true
+console.log(eqObjects(ab, abc)); // => false
 
 
 const cd = { c: "1", d: ["2", 3] };
 const dc = { d: ["2", 3], c: "1" };
-console.log(eqObjects(cd, dc)); // => true
-assertEqual(cd, dc); // fail: not primitives
-
-
 const cd2 = { c: "1", d: ["2", 3, 4] };
-console.log(eqObjects(cd, cd2)); // false, although both arrays, the contents are different
-eqObjects(cd, cd2); // => false
-assertEqual(cd, cd2); // fail: we aren't built to deal with arrays yet
+
+console.log(eqObjects(cd, dc)); // => true
+console.log(eqObjects(cd, cd2)); // => false, although both arrays, the contents are different
