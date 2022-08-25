@@ -1,6 +1,5 @@
 // We will now create a version of eqArrays but for Objects
-
-// First, a copy of assertEqual func
+// Deleted my comments, if you want to reach it, just check the last git log
 const assertEqual = function(actual, expected) {
   if (actual === expected) {
     console.log(`✅✅✅ Assertion Passed: ${actual} === ${expected}`);
@@ -9,7 +8,6 @@ const assertEqual = function(actual, expected) {
   }
 };
 
-// Sixth, we now want to implement arrays and for when we encounter them, we already built a function for this
 const eqArrays = function(arrayA, arrayB) {
   if (arrayA.length !== arrayB.length) {
     return false;
@@ -26,24 +24,14 @@ const eqArrays = function(arrayA, arrayB) {
   return true;
 };
 
-// Second, defind the function definition
-// eqObjects(object1, object2) takes 2 objects as parameters
-// returns true : false based on a perfect strict match
-
 const eqObjects = function(object1, object2) {
-  // Fourth, try to implement logic on primitives first
-    // 2 objects are equal when: 
   console.log(`Obj1 keys: ${Object.keys(object1)} | Obj2 keys: ${Object.keys(object2)}`);
   
-  // if NUMBER of keys are the same
   if (Object.keys(object1).length === Object.keys(object2).length) {
 
-    // if VALUE of each key is the same
-    // loop through each key in ONE object
     for (const property of Object.keys(object1)) {
       const value1 = object1[property];
       const value2 = object2[property];
-      // Seventh, if we encounter a property that is an array, we should pass that property into our eqArrays() function
       if (Array.isArray(value1)) { // if the current iterated key is an array
         console.log(`Property: ${property} is an array`);
         if (eqArrays(value1, value2)) {
@@ -71,7 +59,6 @@ const eqObjects = function(object1, object2) {
 // const ba = { b: "2", a: "1" };
 
 
-// // Third, use assertEqual() to test simple things at first
 // // assertEqual(ab, ba); // => fail; ab && ba are not primitives
 // // assertEqual(ab.a, ba.a); // => pass; "1" === "1", primitives: string
 
@@ -81,7 +68,6 @@ const eqObjects = function(object1, object2) {
 // console.log(eqObjects(ab, abc)); // => false
 
 
-// Fifth, good job on primitives, but what if the values have arrays?
 const cd = { c: "1", d: ["2", 3] };
 const dc = { d: ["2", 3], c: "1" };
 console.log(eqObjects(cd, dc)); // => true
