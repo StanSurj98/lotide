@@ -29,11 +29,22 @@ const assertArraysEqual = function (arrayA, arrayB) {
 
 const letterPositions = function(sentence) {
   const results = {};
-  // first to iterate through the entire string without spaces
-  for (const letter of sentence) {
-    if (letter !== " ") {
-
+  // first to iterate through the entire string without spaces, but i need index positions
+  for (let i = 0; i < sentence.length; i++) {
+    if (sentence[i] !== " ") {
+      // console.log(`letter at ${i}: ${sentence[i]}`) // => log letters without spaces
+      // i want something like results[letter].push(letter[index]);
+      if (results[sentence[i]]) { // if object results AT property [sentence[i]] exists/true
+        results[sentence[i]].push(i); // then for the property [sentence[i]] (the letter), we push to an array, index number i
+      } else { // otherwise... if property [sentence[i]] (the letter) doesnt exist yet/false
+        results[sentence[i]] = []; // we create an empty array for that property
+        results[sentence[i]].push(i); // we push the index number into that property
+      }
     }
   }
+  console.log(results);
   return results;
 };
+
+letterPositions("hello there"); 
+assertArraysEqual(letterPositions("hello").e, [1]); // => pass
