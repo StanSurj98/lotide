@@ -1,5 +1,8 @@
 // Takes in two arrays and looks for strict match; returns true or false
 const eqArrays = function(arrayA, arrayB) {
+  if (arrayA.length !== arrayB.length) {
+    return false;
+  }
   // loop through elements of arrayA and arrayB
   for (let i = 0; i < arrayA.length; i++) {
     console.log(`arrayA at ${i}: `, arrayA[i])
