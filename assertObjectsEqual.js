@@ -1,36 +1,28 @@
 const eqObjects = function(object1, object2) {
   const keys1 = Object.keys(object1);
   const keys2 = Object.keys(object2);
-  console.log(`Keys => Obj1: ${keys1} | Obj2: ${keys2}`);
   
-  if (keys1.length === keys2.length) {
-    for (const property of keys1) {
-      const value1 = object1[property];
-      const value2 = object2[property];
-      if (Array.isArray(value1)) { // if the current iterated key is an array
-        console.log(`Property: ${property} is an array.`);
-        if (eqArrays(value1, value2)) {
-          console.log(`These arrays are equal.`);
-          console.log(`Obj1 => Property: ${property}, Value: ${value1}`);
-          console.log(`Obj2 => Property: ${property}, Value: ${value2}`);
-        } else {
+  if (keys1.length !== keys2.length) { // Guard 1: if lengths !==, false
+    console.log(`The number of properties are not equal. Exiting.`);
+    return false;
+  } else {
+    for (const x of keys1) {
+      const val1 = object1[x];
+      const val2 = object2[x];
+      if (Array.isArray(val1)) { // Check: if iteration is an array, else compare values
+        if (! eqArrays(val1, val2)) { // Guard 2: if arrays NOT equal, false
           console.log(`The arrays are not equal. Exiting.`);
           return false;
         }
-      } else if (value1 === value2) { // if property isn't an array, just compare the value
-        console.log(`Values are the same for these properties.`)
-        console.log(`Obj1 => Property: ${property}, Value: ${value1}`);
-        console.log(`Obj2 => Property: ${property}, Value: ${value2}`);
-      } else {
+      } else if (val1 !== val2) { // Guard 2: if values NOT equal, false
         console.log(`The values are not equal. Exiting.`);
         return false;
+      } else {
+        console.log(`Val1:${val1} && Val2: ${val2} are equal at ${x}.`)
       }
     }
-  } else {
-    console.log(`The number of properties are not equal. Exiting.`);
-    return false;
   }
-  // we want true as default, we provided a false return for everything that would not satisfy the conditionals
+  // Default: true => the guard clauses prevent getting here
   return true; 
 };
 
