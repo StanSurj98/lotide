@@ -9,21 +9,19 @@ const assertEqual = function(actual, expected) {
 };
 
 const eqArrays = function(arrayA, arrayB) {
-  if (arrayA.length !== arrayB.length) {
+  if (arrayA.length !== arrayB.length) { // Guard 1: if array lengths NOT equal => false
     return false;
   }
-  // loop through elements of arrayA and arrayB
   for (let i = 0; i < arrayA.length; i++) {
-    console.log(`arrayA at ${i}`, arrayA[i])
-    console.log(`arrayB at ${i}`, arrayB[i])
-    // Compare the elements at the same index for each array
-    if (arrayA[i] !== arrayB[i]) {
+    if (arrayA[i] !== arrayB[i]) { // Guard 2: if array values NOT equal => false
       return false;
     }
   }
-  return true;
+  return true; // Default: true => guard clauses prevent from getting here
 };
 
+// --- The below is my old code for eqObjects ---
+/*
 const eqObjects = function(object1, object2) {
   const keys1 = Object.keys(object1);
   const keys2 = Object.keys(object2);
@@ -31,7 +29,7 @@ const eqObjects = function(object1, object2) {
   
   if (keys1.length === keys2.length) {
     for (const property of keys1) {
-      const value1 = object1[property];
+      const val1 = object1[property];
       const value2 = object2[property];
       if (Array.isArray(value1)) { // if the current iterated key is an array
         console.log(`Property: ${property} is an array.`);
@@ -59,7 +57,38 @@ const eqObjects = function(object1, object2) {
   // we want true as default, we provided a false return for everything that would not satisfy the conditionals
   return true; 
 };
+*/
 
+
+
+// --- eqObjects refactored --- 
+const eqObjects = function(object1, object2) {
+  const keys1 = Object.keys(object1);
+  const keys2 = Object.keys(object2);
+  
+  if (keys1.length !== keys2.length) { // Guard 1: if lengths !==, false
+    console.log(`The number of properties are not equal. Exiting.`);
+    return false;
+  } else {
+    for (const x of keys1) {
+      const val1 = object1[x];
+      const val2 = object2[x];
+      if (Array.isArray(val1)) { // Check: if iteration is an array, else compare values
+        if (! eqArrays(val1, val2)) { // Guard 2: if arrays NOT equal, false
+          console.log(`The arrays are not equal. Exiting.`);
+          return false;
+        }
+      } else if (val1 !== val2) { // Guard 2: if values NOT equal, false
+        console.log(`The values are not equal. Exiting.`);
+        return false;
+      } else {
+        console.log(`Val1:${val1} && Val2: ${val2} are equal at ${x}.`)
+      }
+    }
+  }
+  // Default: true => the guard clauses prevent getting here
+  return true; 
+};
 
 const ab = { a: "1", b: "2" };
 const ba = { b: "2", a: "1" };
