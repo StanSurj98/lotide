@@ -9,29 +9,10 @@ const assertObjectsEqual = function(actual, expected) {
   // ^^^ This inspect function is from a utility library we are downloading
 
   if (eqObjects(actual, expected) === true) {
-    console.log(`✅✅✅ Assertion Passed: ${inspect(actual)} and ${inspect(expected)} are equal`);
+    return console.log(`✅✅✅ Assertion Passed: ${inspect(actual)} and ${inspect(expected)} are equal`);
   } else {
-    console.log(`🛑🛑🛑 Assertion Failed: ${inspect(actual)} and ${inspect(expected)} are NOT equal`);
+    return console.log(`🛑🛑🛑 Assertion Failed: ${inspect(actual)} and ${inspect(expected)} are NOT equal`);
   }
 };
-
-// // TEST CODES
-// const ob1 = {
-//   a: 1,
-//   b: 2,
-//   c: 3,
-// };
-// const ob2 = {
-//   a: 1,
-//   b: 2,
-//   c: 3,
-// };
-// const ob3 = {
-//   a: "1",
-//   b: "2",
-//   c: "3",
-// }
-// assertObjectsEqual(ob1, ob2); // => pass
-// assertObjectsEqual(ob1, ob3); // => fail
 
 module.exports = assertObjectsEqual;

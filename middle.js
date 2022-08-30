@@ -1,11 +1,3 @@
-// --- Implement MIDDLE ---
-// this func takes in an array
-// returns the middle-most element(s) of the given array.
-// ONLY return the middle element:
-// therefore: [1] => []; || [1, 2] => [];
-// arrays with ODD # of elms: [1, 2, 3] => [2]; || [1, 2, 3, 4, 5] => [3];
-// arrays with EVEN # of elms: [1, 2, 3, 4] => [2, 3]; || [1, 2, 3, 4, 5, 6] => [3, 4]
-
 // helper func to find index nb at middle
 const midIndex = (array) => {
   // take total num of elms, div by 2, round down => should find our mid index
@@ -23,7 +15,6 @@ const isArrEven = (array) => {
 }
 
 
-// create a function that takes in an array
 const middle = (array) => {
   let midElm = [];
   index = midIndex(array);
