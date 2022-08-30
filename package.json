@@ -1,7 +1,7 @@
 {
-  "name": "lotide",
+  "name": "@stan_surj98/lotide",
   "version": "1.0.0",
-  "description": "",
+  "description": "A mini clone library of Lodash, created as part of our learning journey at Lighthouse Labs. This library is NOT intended to be used for production level code, as this is a mini clone and is an incomplete library made for educational purposes only.",
   "main": "index.js",
   "directories": {
     "test": "test"
@@ -13,8 +13,8 @@
     "type": "git",
     "url": "git+https://github.com/StanSurj98/lotide.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["lighthouseLabs", "Lodash", "Lotide", "library"],
+  "author": "Stanley Surjanto <stan.surjanto@gmail.com> (https://github.com/StanSurj98/lotide)",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/StanSurj98/lotide/issues"
