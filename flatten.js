@@ -21,4 +21,6 @@ const flatten = (list) => {
 };
     
 
+const a1 = [[1, 2, 3], 4, 5, 6, [7], [8, 9, 10]];
 assertArraysEqual(flatten(arr), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+assertArraysEqual(flatten(a1), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
